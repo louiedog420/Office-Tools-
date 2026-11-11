@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+<title>Reports — Office Tools</title>
+<link rel="stylesheet" href="css/suite.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the summary</a>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <p class="crumb"><a href="index.html">All tools</a></p>
+      <h1>Reports</h1>
+      <p class="tagline">One page of what needs attention, from the other tools saved in this browser.</p>
+    </div>
+  </header>
+  <nav class="sitenav" aria-label="Tools">
+    <a href="index.html">Home</a>
+    <a href="payroll.html">Payroll</a>
+    <a href="scheduler.html">Schedule</a>
+    <a href="time-off.html">Time off</a>
+    <a href="invoices.html">Invoices</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="fleet.html">Fleet</a>
+    <a href="reports.html" aria-current="page">Reports</a>
+  </nav>
+  <main class="wrap" id="main">
+    <section class="card no-print">
+      <p>This page reads payroll, invoices, fleet, time off, and hiring saved in this browser. It does not keep a separate list. Open the other tools and click <strong>Load sample</strong> if you want to practice. Those names are made up.</p>
+      <div class="toolbar">
+        <button type="button" class="btn" id="btn-refresh">Refresh</button>
+        <button type="button" class="btn gold" id="btn-print">Print this summary</button>
+        <button type="button" class="btn gold" id="btn-export">Download summary (CSV)</button>
+      </div>
+      <p class="hint">To bring a saved copy back, use Restore all data below. To bring a spreadsheet into one tool, use Import CSV on that tool.</p>
+    </section>
+    <div id="report"></div>
+    <section class="card no-print" id="data-tools"></section>
+  </main>
+  <footer class="site-footer no-print"><p>Office Tools keeps what you type in this browser only. Nothing is uploaded. Use Backup / Restore all data, and open this site in the same browser on this computer next time.</p></footer>
+  <script src="js/payroll-calc.js"></script>
+  <script src="js/due-dates.js"></script>
+  <script src="js/report-logic.js"></script>
+  <script src="js/suite.js"></script>
+  <script src="js/reports-page.js"></script>
+</body>
+</html>

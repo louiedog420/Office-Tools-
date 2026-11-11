@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+<title>Payroll — Office Tools</title>
+<link rel="stylesheet" href="css/suite.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the tool</a>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <p class="crumb"><a href="index.html">All tools</a></p>
+      <h1>Payroll</h1>
+      <p class="tagline">Regular pay and overtime, figured out for you. Nothing to install — it works right in this window.</p>
+      <div class="totals-pill" id="header-totals">
+        <div><span class="tlabel">People</span><span class="tval" id="tot-people">0</span></div>
+        <div><span class="tlabel">Regular hours</span><span class="tval" id="tot-reg-hrs">0.00</span></div>
+        <div><span class="tlabel">Overtime hours</span><span class="tval" id="tot-ot-hrs">0.00</span></div>
+        <div><span class="tlabel">Snow hours</span><span class="tval" id="tot-snow-hrs">0.00</span></div>
+        <div><span class="tlabel">Regular pay</span><span class="tval" id="tot-reg-pay">$0.00</span></div>
+        <div><span class="tlabel">Snow pay</span><span class="tval" id="tot-snow-pay">$0.00</span></div>
+        <div><span class="tlabel">Overtime pay</span><span class="tval" id="tot-ot-pay">$0.00</span></div>
+        <div class="gross"><span class="tlabel">Team gross pay</span><span class="tval" id="tot-gross">$0.00</span></div>
+      </div>
+    </div>
+  </header>
+  <nav class="sitenav" aria-label="Tools">
+    <a href="index.html">Home</a>
+    <a href="payroll.html" aria-current="page">Payroll</a>
+    <a href="scheduler.html">Schedule</a>
+    <a href="time-off.html">Time off</a>
+    <a href="invoices.html">Invoices</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="fleet.html">Fleet</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+
+
+  <main class="wrap" id="main">
+    <section class="card no-print">
+      <details class="help" id="how-it-works">
+        <summary>How overtime is figured (short and plain)</summary>
+        <div class="help-body">
+          <p>In Maryland, overtime generally follows the federal rule: hours over <strong>40 in one workweek</strong> are overtime. Overtime is usually an extra half of the person’s blended hourly rate, on top of straight-time pay for every hour worked.</p>
+          <ul>
+            <li>A biweekly paycheck is two separate weeks. Someone who works 50 hours one week and 30 the next has <strong>10 overtime hours</strong>, not zero. The extra hours are not averaged over 80.</li>
+            <li>Type regular hours like <strong>8</strong> or <strong>8.5</strong>. Or type clock times like <strong>8:30a / 5p</strong> or <strong>8:30a-5p</strong>. Lunch is taken out only when you use clock times.</li>
+            <li><strong>Snow time:</strong> hours worked between 4:00 PM and 7:00 PM (you can change that window) get an extra $5.00 an hour on top of the regular rate. Those hours still count toward the 40-hour overtime week. If you type clock times, snow hours are figured automatically. If you type a number like 8, type the snow hours in the small “Snow” box under that day (or put the whole week’s snow hours under one day).</li>
+            <li>When someone has overtime AND snow pay, federal rules say the extra $5 has to be folded into the overtime rate. Example: 45 hours at $20, with 5 snow hours. Straight-time 45 × $20 = $900.00. Snow extra 5 × $5 = $25.00. Blended rate ($900 + $25) ÷ 45 = about $20.56. Overtime extra: 5 × half of that = $51.39. Gross pay = $900.00 + $25.00 + $51.39 = <strong>$976.39</strong>.</li>
+            <li>This calculator finds <strong>gross pay only</strong> — the amount before taxes. Your payroll company or accountant still handles tax withholding.</li>
+            <li>Do not type Social Security numbers or bank account numbers in any box. This page does not need them.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="card no-print">
+      <h2>Pay period settings</h2>
+      <div class="settings">
+        <div class="field">
+          <label for="businessName">Business name (for printing)</label>
+          <input type="text" id="businessName" placeholder="Optional">
+        </div>
+        <div class="field">
+          <label for="periodStart">Pay period start</label>
+          <input type="date" id="periodStart">
+        </div>
+        <div class="field">
+          <label for="periodEnd">Pay period end</label>
+          <input type="date" id="periodEnd">
+        </div>
+        <div class="field">
+          <label for="preparedBy">Prepared by</label>
+          <input type="text" id="preparedBy" placeholder="Optional">
+        </div>
+        <div class="choice-group">
+          <span>This pay period is</span>
+          <div class="choices">
+            <label><input type="radio" name="period" value="weekly" checked> Weekly (1 week)</label>
+            <label><input type="radio" name="period" value="biweekly"> Biweekly (2 weeks)</label>
+          </div>
+        </div>
+        <div class="choice-group">
+          <span>Workweek starts on</span>
+          <div class="choices">
+            <label><input type="radio" name="weekStarts" value="monday" checked> Monday</label>
+            <label><input type="radio" name="weekStarts" value="sunday"> Sunday</label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="lunchMinutes">Unpaid lunch (minutes) when using clock times</label>
+          <input type="number" id="lunchMinutes" min="0" max="240" step="1" value="30">
+        </div>
+        <div class="field">
+          <label for="snowPremium">Snow extra pay ($ per hour)</label>
+          <input type="number" id="snowPremium" min="0" step="0.01" value="5">
+        </div>
+        <div class="field">
+          <label for="snowStart">Snow hours start at</label>
+          <input type="text" id="snowStart" value="4:00 PM" placeholder="4:00 PM">
+        </div>
+        <div class="field">
+          <label for="snowEnd">Snow hours end at</label>
+          <input type="text" id="snowEnd" value="7:00 PM" placeholder="7:00 PM">
+        </div>
+      </div>
+      <p class="hint" style="margin-top:0.8rem;">Names and pay rates stay saved on this computer so you can reuse them next payday. Starting a new pay period clears hours but keeps your people.</p>
+      <p class="save-note" id="save-note">Saved on this computer as you type.</p>
+    </section>
+
+    <section class="card no-print" id="timesheet-card">
+      <h2>Enter hours</h2>
+      <p class="hint">Each day box accepts hours (<strong>8</strong> or <strong>8.5</strong>) or clock times (<strong>8:30a / 5p</strong>). The small <strong>Snow</strong> box under each day is for hours between 4:00 PM and 7:00 PM (or the window you set). Clock times fill that in for you; if you typed a number like 8, type the snow hours yourself. Double-time, bonus, and tips are optional. On a smaller screen, slide the table sideways to see every column.</p>
+      <div class="toolbar">
+        <button type="button" class="btn" id="btn-add">+ Add a person</button>
+        <button type="button" class="btn secondary" id="btn-import">Import employee list</button>
+        <button type="button" class="btn secondary" id="btn-sample">Load sample</button>
+        <button type="button" class="btn secondary" id="btn-new-period">Start a new pay period</button>
+        <button type="button" class="btn gold" id="btn-export">Download pay report (CSV)</button>
+        <button type="button" class="btn gold" id="btn-export-people">Download employee list</button>
+        <button type="button" class="btn gold" id="btn-print">Print pay summary</button>
+        <a class="btn secondary" href="Payroll-Helper.xlsx" download>Download the Excel version</a>
+        <button type="button" class="btn danger" id="btn-clear">Clear everything</button>
+      </div>
+      <input type="file" id="import-file" accept=".csv,text/csv,.txt" class="sr-only">
+      <div class="week-tabs" id="week-tabs" hidden>
+        <button type="button" class="btn secondary" data-week="1" id="tab-w1">Week 1</button>
+        <button type="button" class="btn secondary" data-week="2" id="tab-w2">Week 2</button>
+      </div>
+      <div class="table-wrap" id="sheet-wrap"></div>
+    </section>
+
+    <section class="card explain no-print" id="explain-card">
+      <h2>Let me explain the math</h2>
+      <div class="math" id="explain-body"></div>
+      <button type="button" class="btn secondary small" id="btn-close-explain">Close</button>
+    </section>
+
+    <section class="card" id="summary-card">
+      <h2>Pay summary</h2>
+      <p class="hint no-print">This is the clean report — check it, print it, or download it. Amounts are gross pay (before taxes).</p>
+      <div class="print-only" id="print-header"></div>
+      <div class="table-wrap">
+        <table class="summary" id="summary-table">
+          <thead></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+      <p class="hint" id="summary-footnote">Gross pay only. This does not take out taxes, Social Security, Medicare, or other deductions.</p>
+    </section>
+    <section class="card no-print" id="data-tools"></section>
+  </main>
+
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-msg">
+    <div class="modal">
+      <p id="modal-msg"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn secondary" id="modal-cancel">Cancel</button>
+        <button type="button" class="btn danger" id="modal-ok">Yes</button>
+      </div>
+    </div>
+  </div>
+
+<script src="js/payroll-calc.js"></script>
+<script src="js/suite.js"></script>
+<script src="js/payroll-page.js"></script>
+<footer class="site-footer no-print"><p>Office Tools keeps what you type in this browser only. Nothing is uploaded. Use Backup / Restore all data, and open this site in the same browser on this computer next time.</p></footer>
+</body>
+</html>

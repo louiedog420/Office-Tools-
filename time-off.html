@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+<title>Time off — Office Tools</title>
+<link rel="stylesheet" href="css/suite.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the tool</a>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <p class="crumb"><a href="index.html">All tools</a></p>
+      <h1>Time off &amp; attendance</h1>
+      <p class="tagline">Requests, call-outs, and tardies. See the month, and how much time each person has used.</p>
+    </div>
+  </header>
+  <nav class="sitenav" aria-label="Tools">
+    <a href="index.html">Home</a>
+    <a href="payroll.html">Payroll</a>
+    <a href="scheduler.html">Schedule</a>
+    <a href="time-off.html" aria-current="page">Time off</a>
+    <a href="invoices.html">Invoices</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="fleet.html">Fleet</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+  <main class="wrap" id="main">
+    <section class="card no-print">
+      <details class="help">
+        <summary>How to use this page</summary>
+        <div class="help-body">
+          <ul>
+            <li>A request is vacation, sick time, or another day off. Set it to Pending, Approved, or Denied.</li>
+            <li>A call-out is someone who did not come in. A tardy is someone who was late.</li>
+            <li>Day counts are calendar days, including the first and last day. They are not only work days.</li>
+            <li>Names you already saved in Payroll or the Schedule show up as suggestions.</li>
+            <li>The schedule warns you when someone is booked on a day that is approved time off. The names need to match.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="card no-print">
+      <h2>Add a time-off request</h2>
+      <div class="settings">
+        <div class="field">
+          <label for="req-name">Employee</label>
+          <input type="text" id="req-name" list="people-names" autocomplete="off" placeholder="First and last name">
+        </div>
+        <div class="field">
+          <label for="req-type">Type</label>
+          <select id="req-type">
+            <option>Vacation</option>
+            <option>Sick</option>
+            <option>Personal</option>
+            <option>Unpaid</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="req-start">First day</label>
+          <input type="date" id="req-start">
+        </div>
+        <div class="field">
+          <label for="req-end">Last day</label>
+          <input type="date" id="req-end">
+        </div>
+        <div class="field">
+          <label for="req-status">Status</label>
+          <select id="req-status">
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Denied</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="req-notes">Note (optional)</label>
+          <input type="text" id="req-notes" autocomplete="off">
+        </div>
+      </div>
+      <div class="toolbar"><button type="button" class="btn" id="btn-add-request">Add request</button></div>
+    </section>
+
+    <section class="card no-print">
+      <h2>Add a call-out</h2>
+      <div class="settings">
+        <div class="field">
+          <label for="call-name">Employee</label>
+          <input type="text" id="call-name" list="people-names" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="call-date">Date</label>
+          <input type="date" id="call-date">
+        </div>
+        <div class="field">
+          <label for="call-reason">Reason</label>
+          <select id="call-reason">
+            <option>Sick</option>
+            <option>No show</option>
+            <option>Family</option>
+            <option>Truck trouble</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="call-notes">Note (optional)</label>
+          <input type="text" id="call-notes" autocomplete="off">
+        </div>
+      </div>
+      <div class="toolbar"><button type="button" class="btn" id="btn-add-call">Add call-out</button></div>
+    </section>
+
+    <section class="card no-print">
+      <h2>Add a tardy</h2>
+      <div class="settings">
+        <div class="field">
+          <label for="tardy-name">Employee</label>
+          <input type="text" id="tardy-name" list="people-names" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="tardy-date">Date</label>
+          <input type="date" id="tardy-date">
+        </div>
+        <div class="field">
+          <label for="tardy-minutes">Minutes late</label>
+          <input type="number" id="tardy-minutes" min="1" step="1" inputmode="numeric" value="15">
+        </div>
+        <div class="field">
+          <label for="tardy-notes">Note (optional)</label>
+          <input type="text" id="tardy-notes" autocomplete="off">
+        </div>
+      </div>
+      <div class="toolbar"><button type="button" class="btn" id="btn-add-tardy">Add tardy</button></div>
+      <datalist id="people-names"></datalist>
+    </section>
+
+    <section class="card no-print">
+      <div class="toolbar">
+        <button type="button" class="btn secondary" id="btn-sample">Load sample</button>
+        <button type="button" class="btn gold" id="btn-export">Download CSV</button>
+        <button type="button" class="btn secondary" id="btn-import">Import CSV</button>
+        <button type="button" class="btn gold" id="btn-print">Print</button>
+        <button type="button" class="btn danger" id="btn-clear">Clear time off</button>
+      </div>
+      <input type="file" id="import-file" accept=".csv,text/csv" class="sr-only">
+      <p class="save-note" id="status-line" role="status">Saved on this computer as you type.</p>
+      <p class="hint">CSV columns: Type, Employee, Detail, Start, End, Status, Minutes, Notes. Type is Request, Call-out, or Tardy.</p>
+    </section>
+
+    <section class="card">
+      <h2>Calendar</h2>
+      <div class="toolbar no-print">
+        <button type="button" class="btn secondary" id="btn-cal-prev">Previous month</button>
+        <button type="button" class="btn secondary" id="btn-cal-next">Next month</button>
+      </div>
+      <h3 id="cal-title"></h3>
+      <div class="cal-scroll"><div id="calendar"></div></div>
+    </section>
+
+    <section class="card">
+      <h2>Totals by person</h2>
+      <p class="hint">Approved and pending numbers are calendar days. Call-outs and tardies are counts.</p>
+      <div class="table-wrap" id="totals"></div>
+    </section>
+
+    <section class="card">
+      <h2>Requests</h2>
+      <div id="request-list" class="record-list"></div>
+    </section>
+    <section class="card">
+      <h2>Call-outs</h2>
+      <div id="call-list" class="record-list"></div>
+    </section>
+    <section class="card">
+      <h2>Tardies</h2>
+      <div id="tardy-list" class="record-list"></div>
+    </section>
+
+    <section class="card no-print" id="data-tools"></section>
+  </main>
+  <footer class="site-footer no-print"><p>Office Tools keeps what you type in this browser only. Nothing is uploaded. Use Backup / Restore all data, and open this site in the same browser on this computer next time.</p></footer>
+  <script src="js/due-dates.js"></script>
+  <script src="js/suite.js"></script>
+  <script src="js/timeoff-page.js"></script>
+</body>
+</html>
