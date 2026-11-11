@@ -12,13 +12,13 @@ The address is:
 
 The dash at the end of `Office-Tools-` is part of the name. Leave it in.
 
-GitHub does not always switch the website on by itself. A person who can change this repo's settings needs to do this **once**:
+The publish step can fail the first time, before Pages has ever been switched on. If the address shows a GitHub "404" page, a person who can change this repo's settings needs to do this **once**:
 
 1. Open https://github.com/louiedog420/Office-Tools-
 2. Click **Settings** (the tab along the top of the repo, not your personal account settings).
 3. In the left sidebar, click **Pages**.
 4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-5. Open the **Actions** tab. If GitHub asks you to allow the workflow, approve **Deploy GitHub Pages**.
+5. Open the **Actions** tab. Open the failed **Deploy GitHub Pages** run and click **Re-run failed jobs**. If GitHub asks you to allow the workflow, approve it first.
 6. Wait a minute or two, then open https://louiedog420.github.io/Office-Tools-/
 
 The file `.github/workflows/pages.yml` publishes the site when Source is GitHub Actions. It runs after changes are merged into the **main** branch. A pull request by itself does not update the live site.
