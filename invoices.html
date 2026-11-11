@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+<title>Invoices — Office Tools</title>
+<link rel="stylesheet" href="css/suite.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the tool</a>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <p class="crumb"><a href="index.html">All tools</a></p>
+      <h1>Invoices &amp; bills</h1>
+      <p class="tagline">Bills you need to pay, invoices you sent, and a simple invoice you can print.</p>
+    </div>
+  </header>
+  <nav class="sitenav" aria-label="Tools">
+    <a href="index.html">Home</a>
+    <a href="payroll.html">Payroll</a>
+    <a href="scheduler.html">Schedule</a>
+    <a href="time-off.html">Time off</a>
+    <a href="invoices.html" aria-current="page">Invoices</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="fleet.html">Fleet</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+  <main class="wrap" id="main">
+    <section class="card no-print">
+      <details class="help">
+        <summary>How to use this page</summary>
+        <div class="help-body">
+          <ul>
+            <li><strong>Bill to pay</strong> is money you owe a vendor. <strong>Invoice you sent</strong> is money a customer owes you.</li>
+            <li>Unpaid items turn red when the due date has passed. Items due in the next 14 days are called out at the top.</li>
+            <li>Mark something paid when the money has moved. Paid items stay on the list so you can look back.</li>
+            <li>The invoice form at the bottom is for printing. You can also save it onto the list.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="attention-card">
+      <h2>Coming up and overdue</h2>
+      <div id="attention"></div>
+    </section>
+
+    <section class="card no-print" id="bills-area">
+      <h2 id="form-title">Add a bill or invoice</h2>
+      <div class="choice-group">
+        <span>This is</span>
+        <div class="choices">
+          <label><input type="radio" name="kind" value="bill" checked> A bill to pay</label>
+          <label><input type="radio" name="kind" value="invoice"> An invoice you sent</label>
+        </div>
+      </div>
+      <div class="settings">
+        <div class="field">
+          <label for="party">Vendor or customer</label>
+          <input type="text" id="party" autocomplete="off" placeholder="Who is this for?">
+        </div>
+        <div class="field">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" min="0" step="0.01" inputmode="decimal" placeholder="0.00">
+        </div>
+        <div class="field">
+          <label for="due">Due date</label>
+          <input type="date" id="due">
+        </div>
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status">
+            <option value="unpaid">Unpaid</option>
+            <option value="paid">Paid</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="number">Reference number (optional)</label>
+          <input type="text" id="number" autocomplete="off" placeholder="SAMPLE-1001">
+        </div>
+        <div class="field">
+          <label for="notes">Note (optional)</label>
+          <input type="text" id="notes" autocomplete="off">
+        </div>
+      </div>
+      <div class="toolbar">
+        <button type="button" class="btn" id="btn-save-item">Save</button>
+        <button type="button" class="btn secondary" id="btn-cancel-edit" hidden>Cancel edit</button>
+      </div>
+      <p class="save-note" id="status-line" role="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>Everything on the list</h2>
+      <div class="toolbar no-print">
+        <button type="button" class="btn secondary" id="btn-sample">Load sample</button>
+        <button type="button" class="btn gold" id="btn-export">Download CSV</button>
+        <button type="button" class="btn secondary" id="btn-import">Import CSV</button>
+        <button type="button" class="btn gold" id="btn-print">Print list</button>
+        <button type="button" class="btn danger" id="btn-clear">Clear bills and invoices</button>
+      </div>
+      <input type="file" id="import-file" accept=".csv,text/csv" class="sr-only">
+      <p class="hint no-print">CSV columns: Kind, Party, Amount, Due Date, Status, Number, Notes. Kind is Bill or Invoice.</p>
+      <div id="item-list" class="record-list"></div>
+    </section>
+
+    <section class="card" id="invoice-generator">
+      <h2 class="no-print">Printable invoice</h2>
+      <p class="hint no-print">Fill this in, check the preview, then print it or save it as an invoice you sent.</p>
+      <div class="settings no-print">
+        <div class="field">
+          <label for="from-name">Your business name</label>
+          <input type="text" id="from-name" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="from-address">Your address</label>
+          <textarea id="from-address"></textarea>
+        </div>
+        <div class="field">
+          <label for="from-phone">Your phone</label>
+          <input type="tel" id="from-phone" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="to-name">Bill to</label>
+          <input type="text" id="to-name" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="to-address">Their address</label>
+          <textarea id="to-address"></textarea>
+        </div>
+        <div class="field">
+          <label for="inv-number">Invoice number</label>
+          <input type="text" id="inv-number" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="inv-date">Invoice date</label>
+          <input type="date" id="inv-date">
+        </div>
+        <div class="field">
+          <label for="inv-due">Due date</label>
+          <input type="date" id="inv-due">
+        </div>
+        <div class="field">
+          <label for="inv-note">Note on the invoice</label>
+          <input type="text" id="inv-note" autocomplete="off">
+        </div>
+      </div>
+      <div id="lines" class="no-print"></div>
+      <div class="toolbar no-print">
+        <button type="button" class="btn secondary" id="btn-add-line">+ Add a line</button>
+        <button type="button" class="btn" id="btn-save-invoice">Save as an invoice you sent</button>
+        <button type="button" class="btn gold" id="btn-print-invoice">Print this invoice</button>
+      </div>
+      <div class="invoice-sheet" id="invoice-sheet"></div>
+    </section>
+
+    <section class="card no-print" id="data-tools"></section>
+  </main>
+  <footer class="site-footer no-print"><p>Office Tools keeps what you type in this browser only. Nothing is uploaded. Use Backup / Restore all data, and open this site in the same browser on this computer next time.</p></footer>
+  <script src="js/due-dates.js"></script>
+  <script src="js/suite.js"></script>
+  <script src="js/invoices-page.js"></script>
+</body>
+</html>

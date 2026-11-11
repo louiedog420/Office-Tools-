@@ -1,0 +1,8 @@
+{
+  "name": "office-tools",
+  "private": true,
+  "description": "Free static office tools. No install is required to use the pages.",
+  "scripts": {
+    "test": "node tests/run.js"
+  }
+}

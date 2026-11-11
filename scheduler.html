@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+<title>Schedule — Office Tools</title>
+<link rel="stylesheet" href="css/suite.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the tool</a>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <p class="crumb"><a href="index.html">All tools</a></p>
+      <h1>Schedule</h1>
+      <p class="tagline">Who is working, which days, and whether anyone is booked over 40 hours.</p>
+    </div>
+  </header>
+  <nav class="sitenav" aria-label="Tools">
+    <a href="index.html">Home</a>
+    <a href="payroll.html">Payroll</a>
+    <a href="scheduler.html" aria-current="page">Schedule</a>
+    <a href="time-off.html">Time off</a>
+    <a href="invoices.html">Invoices</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="fleet.html">Fleet</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+  <main class="wrap" id="main">
+    <section class="card no-print">
+      <details class="help">
+        <summary>How to use this page</summary>
+        <div class="help-body">
+          <ul>
+            <li>Add each person, then type a start, an end, and where they are going.</li>
+            <li>Hours are start time to end time. If lunch is unpaid and not already left out of the times, type the lunch minutes. Lunch is taken off a shift only when that shift is 5 hours or longer.</li>
+            <li>A warning appears if someone is scheduled over 40 hours, if two of their shifts overlap, if they are scheduled on a day with approved time off, or if a day has fewer people than you said you need.</li>
+            <li>Approved time off comes from the Time off page, matched by name.</li>
+            <li>Use Copy last week when the new week looks like the old one.</li>
+            <li>Print when you want a copy for the wall. Slide the grid sideways on a phone.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="card no-print">
+      <h2>This week</h2>
+      <p id="week-label" class="hint"></p>
+      <div class="toolbar">
+        <button type="button" class="btn secondary" id="btn-prev">Previous week</button>
+        <button type="button" class="btn" id="btn-this">This week</button>
+        <button type="button" class="btn secondary" id="btn-next">Next week</button>
+        <button type="button" class="btn secondary" id="btn-copy">Copy last week</button>
+      </div>
+      <div class="field" style="max-width:420px">
+        <label for="lunchMinutes">Unpaid lunch to subtract, in minutes</label>
+        <input type="number" id="lunchMinutes" min="0" max="120" step="1" value="0">
+      </div>
+      <p class="hint">Use 0 if your start and end times already leave lunch out. Lunch is removed only from shifts of 5 hours or more.</p>
+    </section>
+
+    <section class="card no-print">
+      <h2>How many people do you need?</h2>
+      <p class="hint">Leave a day blank if you do not want a warning for it.</p>
+      <div id="coverage-fields" class="settings"></div>
+    </section>
+
+    <section class="card no-print">
+      <h2>People</h2>
+      <div class="settings">
+        <div class="field">
+          <label for="new-name">Name</label>
+          <input type="text" id="new-name" autocomplete="off" placeholder="First and last name">
+        </div>
+        <div class="field">
+          <label for="new-role">Job</label>
+          <input type="text" id="new-role" autocomplete="off" placeholder="Driver, laborer, office…">
+        </div>
+      </div>
+      <div class="toolbar">
+        <button type="button" class="btn" id="btn-add-emp">+ Add a person</button>
+        <button type="button" class="btn secondary" id="btn-sample">Load sample</button>
+        <button type="button" class="btn gold" id="btn-export">Download schedule (CSV)</button>
+        <button type="button" class="btn secondary" id="btn-import">Import schedule (CSV)</button>
+        <button type="button" class="btn gold" id="btn-print">Print schedule</button>
+        <button type="button" class="btn danger" id="btn-clear">Clear schedule</button>
+      </div>
+      <input type="file" id="import-file" accept=".csv,text/csv" class="sr-only">
+      <p class="save-note" id="status-line" role="status">Saved on this computer as you type.</p>
+      <p class="hint">CSV columns: Name, Role, Day, Start, End, Where, Week Start. Import replaces the shifts for the weeks in the file. It does not erase other weeks.</p>
+    </section>
+
+    <section class="card no-print" id="grid-card">
+      <h2>Weekly schedule</h2>
+      <p class="hint">On a smaller screen, slide the table sideways. Use + Split shift if someone works two pieces in one day.</p>
+      <div id="warnings"></div>
+      <div class="table-wrap" id="grid"></div>
+    </section>
+
+    <section class="card print-only" id="print-schedule"></section>
+    <section class="card no-print" id="data-tools"></section>
+  </main>
+  <footer class="site-footer no-print"><p>Office Tools keeps what you type in this browser only. Nothing is uploaded. Use Backup / Restore all data, and open this site in the same browser on this computer next time.</p></footer>
+  <script src="js/schedule-logic.js"></script>
+  <script src="js/suite.js"></script>
+  <script src="js/scheduler-page.js"></script>
+</body>
+</html>
